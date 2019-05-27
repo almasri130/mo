@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>my first leaflet map</title>
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" />
+	<style>
+		#mapContainer{
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+		}
+		
+	</style>
+
+</head>
+<body>
+	<div id ="mapContainer" style="width: 1450px; height: 800x"></div>
+	<script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"></script>
+	<script>
+	var map = L.map('mapContainer').setView([34.7324, 36.7137], 7);
+
+	L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+	    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+	}).addTo(map);
+
+
+	L.marker([34.7324, 36.7137])
+	.addTo(map).bindPopup("my city");
+	var circle = L.circle([34.4099, 36.7550], {
+		color: 'red',
+    	fillColor: '#f03',
+   		fillOpacity: 0.3,
+   	 	radius: 10000
+	}).addTo(map).bindPopup("the place that i lived in ");
+
+			//adding polygon
+	var polygon = L.polygon([
+	    [34.7374, 36.7137],
+	    [34.7344, 36.7147],
+	    [34.7354, 36.7157]
+	]).addTo(map);
+
+	function onMapClick(e) {
+    alert("You clicked the map at " + e.latlng);
+	}
+
+	map.on('click', onMapClick);
+
+	var greenIcon = L.icon({
+	    iconUrl: 'museum.png',
+	    iconSize:     [25, 50], // size of the icon
+	    iconAnchor:   [16, 37], // point of the icon which will correspond to marker's location
+	    popupAnchor:  [0, -30] // point from which the popup should open relative to the iconAnchor
+	});
+	L.marker([34.5700, 38.2922], {icon: greenIcon}).addTo(map).bindPopup("historical_Place ");
+	var greenIcon = L.icon({
+	    iconUrl: 'government.png',
+	    iconSize:     [25, 50], // size of the icon
+	    iconAnchor:   [16, 37], // point of the icon which will correspond to marker's location
+	    popupAnchor:  [0, -30] // point from which the popup should open relative to the iconAnchor
+	});
+	L.marker([33.5138, 36.2765], {icon: greenIcon}).addTo(map).bindPopup("capital city (ALSHAM)");
+	
+</script>
+</body>
+</html>
